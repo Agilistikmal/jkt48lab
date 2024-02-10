@@ -15,3 +15,52 @@ func LiveIDNPart(ctx *fiber.Ctx) error {
 		"lives": lives,
 	})
 }
+
+func LiveSRPart(ctx *fiber.Ctx) error {
+	lives := service.GetSRLives()
+	return ctx.Render("live/sr_part", fiber.Map{
+		"lives": lives,
+	})
+}
+
+// IDN
+func LiveIDNDetail(ctx *fiber.Ctx) error {
+	return ctx.Render("live/idn/detail", fiber.Map{
+		"username": ctx.Params("username"),
+	}, "layout/root")
+}
+
+func LiveIDNDetailPart(ctx *fiber.Ctx) error {
+	live := service.GetIDNLive(ctx.Params("username"))
+	return ctx.Render("live/idn/detail_part", fiber.Map{
+		"live": live,
+	})
+}
+
+func LiveIDNPlayerPart(ctx *fiber.Ctx) error {
+	live := service.GetIDNLive(ctx.Params("username"))
+	return ctx.Render("live/idn/player_part", fiber.Map{
+		"live": live,
+	})
+}
+
+// Showroom
+func LiveSRDetail(ctx *fiber.Ctx) error {
+	return ctx.Render("live/sr/detail", fiber.Map{
+		"username": ctx.Params("username"),
+	}, "layout/root")
+}
+
+func LiveSRDetailPart(ctx *fiber.Ctx) error {
+	live := service.GetSRLive(ctx.Params("username"))
+	return ctx.Render("live/sr/detail_part", fiber.Map{
+		"live": live,
+	})
+}
+
+func LiveSRPlayerPart(ctx *fiber.Ctx) error {
+	live := service.GetSRLive(ctx.Params("username"))
+	return ctx.Render("live/sr/player_part", fiber.Map{
+		"live": live,
+	})
+}
