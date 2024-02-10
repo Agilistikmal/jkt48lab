@@ -8,7 +8,7 @@ type ShowroomResponses struct {
 			Telop            string `json:"telop"`
 			FollowerNum      int    `json:"follower_num"`
 			StartedAt        int    `json:"started_at"`
-			Image            string `json:"image"`
+			ImageSquare      string `json:"image_square"`
 			ViewNum          int    `json:"view_num"`
 			MainName         string `json:"main_name"`
 			PremiumRoomType  int    `json:"premium_room_type"`
@@ -18,4 +18,11 @@ type ShowroomResponses struct {
 			} `json:"streaming_url_list"`
 		} `json:"lives"`
 	} `json:"onlives"`
+}
+
+type ShowroomStreamingUrlResponses struct {
+	StreamingUrlList []struct {
+		Label string `json:"label"`
+		Url   string `json:"url"`
+	} `json:"streaming_url_list"`
 }
