@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"strings"
 	"time"
 
 	"github.com/agilistikmal/jkt48lab-htmx/app/helper"
@@ -25,9 +26,9 @@ func GetIDNLives() []model.Live {
 			if live.Status != "live" {
 				continue
 			}
-			// if !strings.Contains(strings.ToLower(live.Slug), "jkt48") {
-			// 	continue
-			// }
+			if !strings.Contains(strings.ToUpper(live.Slug), PREFIX) {
+				continue
+			}
 			startedAt, _ := time.Parse("2006-01-02T15:04:05+07:00", live.LiveAt)
 			lives = append(lives, model.Live{
 				Member: &model.Member{
@@ -47,4 +48,46 @@ func GetIDNLives() []model.Live {
 		page++
 	}
 	return lives
+}
+
+func GetIDNLive(username string) model.Live {
+	page := 1
+	var result model.Live
+	for {
+		resp := helper.GraphQLIDN(page)
+		body, _ := io.ReadAll(resp.Body)
+		var idnResponses model.IDNResponses
+		json.Unmarshal(body, &idnResponses)
+		if len(idnResponses.Data.GetLivestreams) == 0 {
+			break
+		}
+		for _, live := range idnResponses.Data.GetLivestreams {
+			if live.Status != "live" {
+				continue
+			}
+			if !strings.Contains(strings.ToLower(live.Slug), PREFIX) {
+				continue
+			}
+			if live.Creator.Username == username {
+				startedAt, _ := time.Parse("2006-01-02T15:04:05+07:00", live.LiveAt)
+				result = model.Live{
+					Member: &model.Member{
+						Username:  live.Creator.Username,
+						FullName:  live.Creator.Name,
+						Followers: live.Creator.FollowerCount,
+					},
+					Title:        live.Title,
+					OriginalUrl:  fmt.Sprintf("https://www.idn.app/%v/live/%v", live.Creator.Username, live.Slug),
+					RoomID:       live.Slug,
+					StreamingUrl: live.PlaybackUrl,
+					Views:        live.ViewCount,
+					Image:        live.ImageUrl,
+					StartedAt:    startedAt.Unix(),
+				}
+				break
+			}
+		}
+		page++
+	}
+	return result
 }

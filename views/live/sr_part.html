@@ -1,0 +1,32 @@
+<h1 class="font-bold text-2xl">Showroom</h1>
+<p>{{ len .lives }} members is live.</p>
+</style>
+<div class="flex gap-4 overflow-x-scroll">
+  {{ range $live := .lives }}
+  <div class="mt-5 mb-3">
+    <a
+      href="/live/sr/{{ $live.Member.Username }}"
+      class="block bg-dark-900 w-[240px] h-[240px] overflow-hidden relative rounded-lg group"
+    >
+      <img
+        src="{{ $live.Image }}"
+        alt=""
+        width="240px"
+        class="aspect-square object-top object-cover"
+      />
+      <div
+        class="absolute bottom-0 left-0 w-full bg-dark-900/50 group-hover:bg-red-400/50 group-hover:-translate-y-1 transition duration-500 text-white px-3 pt-1 pb-3"
+      >
+        <h1 class="font-bold">{{ $live.Member.Username }}</h1>
+        <h1 class="text-sm">{{ $live.Title }}</h1>
+      </div>
+      <div
+        class="absolute top-2 right-2 bg-red-400/80 text-white rounded-full px-3 py-1 text-xs"
+      >
+        <i class="bx bxs-group"></i>
+        {{ $live.Views }}
+      </div>
+    </a>
+  </div>
+  {{ end }}
+</div>
