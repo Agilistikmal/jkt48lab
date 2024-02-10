@@ -30,6 +30,7 @@ func GetSRLives() []model.Live {
 			if live.PremiumRoomType != 0 {
 				continue
 			}
+			streamingUrl := GetSRStreamingUrl(live.RoomID)
 			lives = append(lives, model.Live{
 				Member: &model.Member{
 					Username:  live.RoomUrlKey,
@@ -39,9 +40,9 @@ func GetSRLives() []model.Live {
 				Title:        live.Telop,
 				RoomID:       string(rune(live.RoomID)),
 				OriginalUrl:  fmt.Sprintf("https://showroom-live.com/r/%v", live.RoomUrlKey),
-				StreamingUrl: live.StreamingUrlList[0].Url,
+				StreamingUrl: streamingUrl,
 				Views:        live.ViewNum,
-				Image:        live.Image,
+				Image:        live.ImageSquare,
 				StartedAt:    int64(live.StartedAt),
 			})
 		}
@@ -59,4 +60,12 @@ func GetSRLive(username string) model.Live {
 		}
 	}
 	return result
+}
+
+func GetSRStreamingUrl(roomID int) string {
+	resp, _ := http.Get(fmt.Sprintf("https://www.showroom-live.com/api/live/streaming_url?abr_available=1&room_id=%v", roomID))
+	body, _ := io.ReadAll(resp.Body)
+	var srStreamingUrlResponses model.ShowroomStreamingUrlResponses
+	json.Unmarshal(body, &srStreamingUrlResponses)
+	return srStreamingUrlResponses.StreamingUrlList[1].Url
 }

@@ -1,20 +1,56 @@
 <div class="mt-5 px-8 space-y-8">
+  <!-- IDN -->
   <div
     id="idnlive"
     hx-trigger="load, every 60s"
     hx-get="/live/_get-idn"
-    class="p-5 bg-dark-800 text-white rounded-lg"
+    class="p-5 bg-dark-800 border-l-4 border-red-300 text-white rounded-lg"
   >
-    <h1 class="font-bold text-2xl">IDNLives</h1>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/b/ba/IDN_Live.svg"
+      alt=""
+      class="h-[24px]"
+    />
     <p class="animate-pulse">Loading...</p>
   </div>
+
+  <!-- Showroom -->
   <div
     id="showroom"
     hx-trigger="load, every 60s"
     hx-get="/live/_get-sr"
-    class="p-5 bg-dark-800 text-white rounded-lg"
+    class="p-5 bg-dark-800 border-l-4 border-orange-300 text-white rounded-lg"
   >
-    <h1 class="font-bold text-2xl">Showroom</h1>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/f/fa/SHOWROOM_logo.svg"
+      alt=""
+      class="h-[24px]"
+    />
     <p class="animate-pulse">Loading...</p>
+  </div>
+
+  <!-- Notification Info -->
+  <div class="pb-12">
+    <h1 class="font-medium text-2xl">Notifikasi</h1>
+    <p>
+      <a href="/discord" class="text-green-200">Join discord JKT48Lab</a> untuk
+      mendapatkan notifikasi realtime dari setiap member.
+    </p>
+    <p>
+      Atau kalian bisa menambahkan notifikasi ke discord server kalian masing
+      masing dengan klik tombol
+      <a href="/live/notification" class="text-green-200"
+        >Dapatkan Notifikasi</a
+      >
+      dibawah ini.
+    </p>
+    <div
+      class="flex items-center mt-5 flex-wrap gap-2 sm:gap-4 justify-center md:justify-start"
+    >
+      <a href="/live/notification" class="btn">Dapatkan Notifikasi</a>
+      <a href="/live/notification" class="text-green-200"
+        >Join Discord JKT48Lab</a
+      >
+    </div>
   </div>
 </div>
