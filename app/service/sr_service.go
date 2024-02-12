@@ -70,5 +70,8 @@ func GetSRStreamingUrl(roomID int) string {
 	body, _ := io.ReadAll(resp.Body)
 	var srStreamingUrlResponses model.ShowroomStreamingUrlResponses
 	json.Unmarshal(body, &srStreamingUrlResponses)
+	if len(srStreamingUrlResponses.StreamingUrlList) == 0 {
+		return ""
+	}
 	return srStreamingUrlResponses.StreamingUrlList[1].Url
 }
