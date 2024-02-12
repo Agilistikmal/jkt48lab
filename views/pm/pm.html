@@ -1,0 +1,33 @@
+<div class="p-8">
+  <!-- Head -->
+  <div class="flex items-center gap-8">
+    <img src="/assets/PM.webp" alt="" class="h-[72px]" />
+    <div>
+      <h1 class="font-medium text-3xl">
+        JKT48
+        <a href="https://jkt48.primesse.me" class="text-green-200">PM</a>
+        Statistics
+      </h1>
+      <p>
+        Berikut adalah statistik dari Private Message member
+        <a href="https://jkt48.com" class="text-red-200">JKT48</a>. Statistik
+        yang ditampilkan adalah <span class="text-orange-200">Weekly</span> dan
+        <span class="text-blue-200">Monthly</span>.
+      </p>
+      <p>
+        Untuk <span class="text-green-200">Daily</span> Update bisa kalian liat
+        di <a href="/discord" class="text-green-200">Discord JKT48Lab</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Weekly -->
+  <div id="weekly" hx-get="/pm/_get-weekly" hx-trigger="load" class="py-5">
+    <p class="animate-pulse">Loading Weekly Stats...</p>
+  </div>
+
+  <!-- Monthly -->
+  <div id="monthly" hx-get="/pm/_get-monthly" hx-trigger="load" class="py-5">
+    <p class="animate-pulse">Loading Monthly Stats...</p>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/agilistikmal/jkt48lab-htmx/app/service"
+	"github.com/agilistikmal/jkt48lab/app/service"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -32,14 +32,14 @@ func LiveIDNDetail(ctx *fiber.Ctx) error {
 
 func LiveIDNDetailPart(ctx *fiber.Ctx) error {
 	live := service.GetIDNLive(ctx.Params("username"))
-	return ctx.Render("live/idn/detail_part", fiber.Map{
+	return ctx.Render("live/detail_part", fiber.Map{
 		"live": live,
 	})
 }
 
 func LiveIDNPlayerPart(ctx *fiber.Ctx) error {
 	live := service.GetIDNLive(ctx.Params("username"))
-	return ctx.Render("live/idn/player_part", fiber.Map{
+	return ctx.Render("live/player_part", fiber.Map{
 		"live": live,
 	})
 }
@@ -53,14 +53,14 @@ func LiveSRDetail(ctx *fiber.Ctx) error {
 
 func LiveSRDetailPart(ctx *fiber.Ctx) error {
 	live := service.GetSRLive(ctx.Params("username"))
-	return ctx.Render("live/sr/detail_part", fiber.Map{
+	return ctx.Render("live/detail_part", fiber.Map{
 		"live": live,
 	})
 }
 
 func LiveSRPlayerPart(ctx *fiber.Ctx) error {
 	live := service.GetSRLive(ctx.Params("username"))
-	return ctx.Render("live/sr/player_part", fiber.Map{
+	return ctx.Render("live/player_part", fiber.Map{
 		"live": live,
 	})
 }

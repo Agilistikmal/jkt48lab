@@ -1,10 +1,12 @@
-module github.com/agilistikmal/jkt48lab-htmx
+module github.com/agilistikmal/jkt48lab
 
 go 1.21
 
 require (
 	github.com/gofiber/fiber/v2 v2.52.0
 	github.com/gofiber/template/html/v2 v2.1.0
+	github.com/joho/godotenv v1.5.1
+	github.com/lib/pq v1.10.9
 )
 
 require (

@@ -8,5 +8,5 @@ type Live struct {
 	StreamingUrl string
 	Views        int
 	Image        string
-	StartedAt    int64
+	StartedAt    string
 }

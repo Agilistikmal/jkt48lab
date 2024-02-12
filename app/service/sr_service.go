@@ -6,8 +6,9 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 
-	"github.com/agilistikmal/jkt48lab-htmx/app/model"
+	"github.com/agilistikmal/jkt48lab/app/model"
 )
 
 func GetSRLives() []model.Live {
@@ -31,6 +32,8 @@ func GetSRLives() []model.Live {
 				continue
 			}
 			streamingUrl := GetSRStreamingUrl(live.RoomID)
+			location, _ := time.LoadLocation("Asia/Jakarta")
+			startedAt := time.Unix(int64(live.StartedAt), 0).In(location)
 			lives = append(lives, model.Live{
 				Member: &model.Member{
 					Username:  live.RoomUrlKey,
@@ -43,7 +46,7 @@ func GetSRLives() []model.Live {
 				StreamingUrl: streamingUrl,
 				Views:        live.ViewNum,
 				Image:        live.ImageSquare,
-				StartedAt:    int64(live.StartedAt),
+				StartedAt:    fmt.Sprintf("%.2d:%.2d WIB", startedAt.Hour(), startedAt.Minute()),
 			})
 		}
 	}

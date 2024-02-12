@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/agilistikmal/jkt48lab-htmx/routes"
+	"github.com/agilistikmal/jkt48lab/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
 )
@@ -13,6 +13,7 @@ func main() {
 
 	routes.HomeRoutes(app)
 	routes.LiveRoutes(app)
+	routes.PMRoutes(app)
 
 	app.Static("/assets", "./assets")
 	app.Get("/discord", func(c *fiber.Ctx) error {

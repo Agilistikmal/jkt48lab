@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/agilistikmal/jkt48lab-htmx/controllers"
+	"github.com/agilistikmal/jkt48lab/controllers"
 	"github.com/gofiber/fiber/v2"
 )
 

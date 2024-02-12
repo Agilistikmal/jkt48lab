@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/agilistikmal/jkt48lab-htmx/app/helper"
-	"github.com/agilistikmal/jkt48lab-htmx/app/model"
+	"github.com/agilistikmal/jkt48lab/app/helper"
+	"github.com/agilistikmal/jkt48lab/app/model"
 )
 
 func GetIDNLives() []model.Live {
@@ -26,10 +26,11 @@ func GetIDNLives() []model.Live {
 			if live.Status != "live" {
 				continue
 			}
-			if !strings.Contains(strings.ToUpper(live.Slug), PREFIX) {
+			if !strings.Contains(strings.ToUpper(live.Slug), strings.ToLower(PREFIX)) {
 				continue
 			}
-			startedAt, _ := time.Parse("2006-01-02T15:04:05+07:00", live.LiveAt)
+			location, _ := time.LoadLocation("Asia/Jakarta")
+			startedAt, _ := time.ParseInLocation("2006-01-02T15:04:05+07:00", live.LiveAt, location)
 			lives = append(lives, model.Live{
 				Member: &model.Member{
 					Username:  live.Creator.Username,
@@ -42,7 +43,7 @@ func GetIDNLives() []model.Live {
 				StreamingUrl: live.PlaybackUrl,
 				Views:        live.ViewCount,
 				Image:        live.ImageUrl,
-				StartedAt:    startedAt.Unix(),
+				StartedAt:    fmt.Sprintf("%.2d:%.2d WIB", startedAt.Hour(), startedAt.Minute()),
 			})
 		}
 		page++
@@ -65,7 +66,7 @@ func GetIDNLive(username string) model.Live {
 			if live.Status != "live" {
 				continue
 			}
-			if !strings.Contains(strings.ToLower(live.Slug), PREFIX) {
+			if !strings.Contains(strings.ToLower(live.Slug), strings.ToLower(PREFIX)) {
 				continue
 			}
 			if live.Creator.Username == username {
@@ -82,7 +83,7 @@ func GetIDNLive(username string) model.Live {
 					StreamingUrl: live.PlaybackUrl,
 					Views:        live.ViewCount,
 					Image:        live.ImageUrl,
-					StartedAt:    startedAt.Unix(),
+					StartedAt:    fmt.Sprintf("%.2d:%.2d WIB", startedAt.Hour(), startedAt.Minute()),
 				}
 				break
 			}
