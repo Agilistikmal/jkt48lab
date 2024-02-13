@@ -15,19 +15,42 @@
         <span class="text-blue-200">Monthly</span>.
       </p>
       <p>
-        Untuk <span class="text-green-200">Daily</span> Update bisa kalian liat
-        di <a href="/discord" class="text-green-200">Discord JKT48Lab</a>
+        Pengurutan dilakukan berdasarkan
+        <span class="text-red-200">point</span>.
+        <span class="text-red-100/70 text-xs"
+          >Text 1 point, Image 2 point, Voice 3 point.</span
+        >
+      </p>
+      <p>
+        Untuk <span class="text-green-200">Daily Update</span> bisa kalian liat
+        di <a href="/discord" class="text-blue-200">Discord</a> atau
+        <a href="https://x.com/jkt48lab" class="text-blue-200">X (Twitter)</a>
+        JKT48Lab
       </p>
     </div>
   </div>
 
+  <!-- Button -->
+  <div class="mt-5">
+    <div class="flex gap-4 items-center">
+      <a href="/pm/weekly" class="btn">View All Weekly</a>
+      <a href="/pm/monthly" class="btn">View All Monthly</a>
+    </div>
+  </div>
+
   <!-- Weekly -->
-  <div id="weekly" hx-get="/pm/_get-weekly" hx-trigger="load" class="py-5">
-    <p class="animate-pulse">Loading Weekly Stats...</p>
+  <div class="mt-5">
+    <h1 class="text-xl font-semibold">Latest Weekly</h1>
+    <div id="weekly" hx-get="/pm/_get-lastweek" hx-trigger="load">
+      <p class="animate-pulse">Loading latest weekly stats...</p>
+    </div>
   </div>
 
   <!-- Monthly -->
-  <div id="monthly" hx-get="/pm/_get-monthly" hx-trigger="load" class="py-5">
-    <p class="animate-pulse">Loading Monthly Stats...</p>
+  <div class="mt-5">
+    <h1 class="text-xl font-semibold">Latest Monthly</h1>
+    <div id="monthly" hx-get="/pm/_get-lastmonth" hx-trigger="load">
+      <p class="animate-pulse">Loading latest monthly stats...</p>
+    </div>
   </div>
 </div>

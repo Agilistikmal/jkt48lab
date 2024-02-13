@@ -15,6 +15,34 @@ func GetPMStats(statsType string) []model.PMStats {
 	rows, err := conn.Query(`
 		SELECT data FROM pm_stats WHERE 
 		data->>'type' = $1
+		ORDER BY id DESC
+	`, statsType)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var ranks []model.PMStats
+	for rows.Next() {
+		var res string
+		var pmStats model.PMStats
+		rows.Scan(&res)
+		json.Unmarshal([]byte(res), &pmStats)
+		ranks = append(ranks, pmStats)
+	}
+
+	return ranks
+}
+
+func GetLastPMStats(statsType string) []model.PMStats {
+	conn := db.OpenConnection()
+	defer conn.Close()
+
+	rows, err := conn.Query(`
+		SELECT data FROM pm_stats WHERE 
+		data->>'type' = $1
+		ORDER BY id DESC
+		LIMIT 1
 	`, statsType)
 
 	if err != nil {

@@ -3,7 +3,7 @@
   <div class="flex items-center gap-2">
     {{ range $stats := .stats }}
     <span
-      class='px-3 py-1 rounded-full {{ if eq $stats.Type "weekly" }} bg-orange-400 {{ else }} bg-blue-400 {{ end }} text-2xl font-semibold uppercase'
+      class='px-5 py-1 rounded-full {{ if eq $stats.Type "weekly" }} bg-orange-400 {{ else }} bg-blue-400 {{ end }} font-semibold uppercase'
     >
       {{ $stats.Type }}
     </span>
@@ -13,14 +13,14 @@
   </div>
 
   <div class="flex items-center overflow-x-scroll gap-4 mt-5 pb-5">
-    {{ range $rank := $stats.Ranks }}
+    {{ range $i, $rank := $stats.Ranks }}
     <div
       class='bg-dark-900 rounded-lg p-5 border-b-4 {{ if eq $stats.Type "weekly" }} border-orange-300 {{ else }} border-blue-300 {{ end }} w-full min-w-xs max-w-xs text-white'
     >
       <div class="flex items-center gap-2">
         <span
           class="px-3 py-1 rounded-full bg-red-400 text-xs font-semibold uppercase"
-          >1</span
+          >{{ len (printf "a%*s" $i "") }}</span
         >
         <span
           class="px-3 py-1 rounded-full bg-red-400 text-xs font-semibold uppercase"

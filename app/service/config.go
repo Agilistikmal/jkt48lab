@@ -1,3 +1,3 @@
 package service
 
-var PREFIX = "48"
+var PREFIX = "JKT48"

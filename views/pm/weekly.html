@@ -1,0 +1,32 @@
+<div class="p-8">
+  <!-- Head -->
+  <div class="flex items-center gap-8">
+    <img src="/assets/PM.webp" alt="" class="h-[72px]" />
+    <div>
+      <h1 class="font-medium text-3xl">
+        JKT48
+        <a href="https://jkt48.primesse.me" class="text-green-200">PM</a>
+        Statistics
+      </h1>
+      <h1 class="font-medium text-2xl">Weekly</h1>
+      <p class="text-white/70">
+        Diupdate setiap jam 06:00 WIB tanggal 8, 15, 22, 28
+      </p>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="mt-5">
+    <div class="flex gap-4 items-center">
+      <a href="/pm/weekly" class="btn">View All Weekly</a>
+      <a href="/pm/monthly" class="btn">View All Monthly</a>
+    </div>
+  </div>
+
+  <!-- Weekly -->
+  <div class="mt-5">
+    <div id="weekly" hx-get="/pm/_get-weekly" hx-trigger="load">
+      <p class="animate-pulse">Loading all weekly stats...</p>
+    </div>
+  </div>
+</div>

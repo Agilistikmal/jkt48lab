@@ -26,7 +26,7 @@ func GetIDNLives() []model.Live {
 			if live.Status != "live" {
 				continue
 			}
-			if !strings.Contains(strings.ToUpper(live.Slug), strings.ToLower(PREFIX)) {
+			if !strings.Contains(live.Creator.Username, strings.ToLower(PREFIX)) {
 				continue
 			}
 			location, _ := time.LoadLocation("Asia/Jakarta")
@@ -66,7 +66,7 @@ func GetIDNLive(username string) model.Live {
 			if live.Status != "live" {
 				continue
 			}
-			if !strings.Contains(strings.ToLower(live.Slug), strings.ToLower(PREFIX)) {
+			if !strings.Contains(live.Creator.Username, strings.ToLower(PREFIX)) {
 				continue
 			}
 			if live.Creator.Username == username {
