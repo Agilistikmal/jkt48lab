@@ -1,21 +1,51 @@
 {
   "type": "weekly",
-  "period": {
-    "from": "20-12-2023",
-    "to": "21-12-2023"
-  },
+  "period": { "from": "12-02-2024", "to": "12-02-2024" },
   "ranks": [
     {
-      "member": {
-        "username": "Agil",
-        "full_name": "Agil Ghani Istikmal",
-        "followers": 100
-      },
-      "points": 6,
-      "total": 3,
-      "text": 1,
-      "image": 1,
-      "voice": 1
+      "name": "Indah (Indah Cahya)",
+      "count": 34,
+      "textCount": 19,
+      "imageCount": 15,
+      "voiceCount": 0,
+      "points": 49,
+      "profileImage": "https://ucarecdn.com/bdbaecd6-e5d9-44c3-978e-1dec1e35456c/"
+    },
+    {
+      "name": "Lyn (Jesslyn Elly)",
+      "count": 27,
+      "textCount": 15,
+      "imageCount": 12,
+      "voiceCount": 0,
+      "points": 39,
+      "profileImage": "https://ucarecdn.com/442c6238-492f-4141-84e9-04bfc4accdd8/"
+    },
+    {
+      "name": "Lia (Aurellia -)",
+      "count": 33,
+      "textCount": 29,
+      "imageCount": 4,
+      "voiceCount": 0,
+      "points": 37,
+      "profileImage": "https://ucarecdn.com/abb52f63-43dd-4972-b991-95d73fb50461/"
+    },
+    {
+      "name": "Greesel (Greesella Adhalia)",
+      "count": 18,
+      "textCount": 9,
+      "imageCount": 9,
+      "voiceCount": 0,
+      "points": 27,
+      "profileImage": "https://ucarecdn.com/1a90f9e6-bd75-4e14-bb6d-ec668581b499/"
+    },
+    {
+      "name": "Gracie (Grace Octaviani)",
+      "count": 16,
+      "textCount": 8,
+      "imageCount": 8,
+      "voiceCount": 0,
+      "points": 24,
+      "profileImage": "https://ucarecdn.com/f7680511-9955-4a01-b27a-66e5ff12eda4/"
     }
   ]
 }

@@ -7,11 +7,11 @@ type PMStats struct {
 		To   string
 	}
 	Ranks []struct {
-		Member *Member
-		Points int
-		Total  int
-		Text   int
-		Image  int
-		Voice  int
+		Name       string
+		Points     int
+		Count      int
+		TextCount  int
+		ImageCount int
+		VoiceCount int
 	}
 }

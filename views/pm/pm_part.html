@@ -1,65 +1,67 @@
-<div class="p-5 rounded-lg bg-dark-700">
+<div class="p-5 rounded-lg bg-dark-700 space-y-8">
   <!--  -->
-  <div class="flex items-center gap-2">
-    {{ range $stats := .stats }}
-    <span
-      class='px-5 py-1 rounded-full {{ if eq $stats.Type "weekly" }} bg-orange-400 {{ else }} bg-blue-400 {{ end }} font-semibold uppercase'
-    >
-      {{ $stats.Type }}
-    </span>
-    <h1 class="font-medium text-xl">
-      {{ $stats.Period.From }} - {{ $stats.Period.To }}
-    </h1>
-  </div>
+  {{ range $stats := .stats }}
+  <div>
+    <div class="flex items-center gap-2">
+      <span
+        class='px-5 py-1 rounded-full {{ if eq $stats.Type "weekly" }} bg-orange-400 {{ else }} bg-blue-400 {{ end }} font-semibold uppercase'
+      >
+        {{ $stats.Type }}
+      </span>
+      <h1 class="font-medium text-xl">
+        {{ $stats.Period.From }} - {{ $stats.Period.To }}
+      </h1>
+    </div>
 
-  <div class="flex items-center overflow-x-scroll gap-4 mt-5 pb-5">
-    {{ range $i, $rank := $stats.Ranks }}
-    <div
-      class='bg-dark-900 rounded-lg p-5 border-b-4 {{ if eq $stats.Type "weekly" }} border-orange-300 {{ else }} border-blue-300 {{ end }} w-full min-w-xs max-w-xs text-white'
-    >
-      <div class="flex items-center gap-2">
-        <span
-          class="px-3 py-1 rounded-full bg-red-400 text-xs font-semibold uppercase"
-          >{{ len (printf "a%*s" $i "") }}</span
-        >
-        <span
-          class="px-3 py-1 rounded-full bg-red-400 text-xs font-semibold uppercase"
-          >Top Points</span
-        >
-        <span
-          class="px-3 py-1 rounded-full bg-orange-400 text-xs font-semibold uppercase"
-          >{{ $stats.Type }}</span
-        >
-      </div>
-      <div class="mt-2">
-        <span class="text-xs text-white/70">
-          {{ $stats.Period.From }} - {{ $stats.Period.To }}
-        </span>
-        <h1 class="font-medium text-xl">{{ $rank.Member.FullName }}</h1>
-        <span class="text-green-200">{{ $rank.Points }} points</span>
-      </div>
-      <div class="mt-2">
-        <div class="grid grid-cols-2">
-          <div class="flex items-center gap-2">
-            <i class="bx bx-message-square"></i>
-            <span class="text-sm">{{ $rank.Total }} total</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <i class="bx bx-message-square-dots"></i>
-            <span class="text-sm">{{ $rank.Text }} text</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <i class="bx bx-image-alt"></i>
-            <span class="text-sm">{{ $rank.Image }} image</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <i class="bx bxs-microphone"></i>
-            <span class="text-sm">{{ $rank.Voice }} voice</span>
+    <div class="flex items-center overflow-x-scroll gap-4 mt-2 pb-3">
+      {{ range $i, $rank := $stats.Ranks }}
+      <div
+        class='bg-dark-900 rounded-lg p-5 border-b-4 {{ if eq $stats.Type "weekly" }} border-orange-300 {{ else }} border-blue-300 {{ end }} w-full min-w-xs max-w-xs text-white'
+      >
+        <div class="flex items-center gap-2">
+          <span
+            class="px-3 py-1 rounded-full bg-red-400 text-xs font-semibold uppercase"
+            >{{ len (printf "a%*s" $i "") }}</span
+          >
+          <span
+            class="px-3 py-1 rounded-full bg-red-400 text-xs font-semibold uppercase"
+            >Top Points</span
+          >
+          <span
+            class="px-3 py-1 rounded-full bg-orange-400 text-xs font-semibold uppercase"
+            >{{ $stats.Type }}</span
+          >
+        </div>
+        <div class="mt-2">
+          <span class="text-xs text-white/70">
+            {{ $stats.Period.From }} - {{ $stats.Period.To }}
+          </span>
+          <h1 class="font-medium text-xl">{{ $rank.Name }}</h1>
+          <span class="text-green-200">{{ $rank.Points }} points</span>
+        </div>
+        <div class="mt-2">
+          <div class="grid grid-cols-2">
+            <div class="flex items-center gap-2">
+              <i class="bx bx-message-square"></i>
+              <span class="text-sm">{{ $rank.Count }} total</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="bx bx-message-square-dots"></i>
+              <span class="text-sm">{{ $rank.TextCount }} text</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="bx bx-image-alt"></i>
+              <span class="text-sm">{{ $rank.ImageCount }} image</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="bx bxs-microphone"></i>
+              <span class="text-sm">{{ $rank.VoiceCount }} voice</span>
+            </div>
           </div>
         </div>
       </div>
+      {{ end }}
     </div>
-    {{ end }}
   </div>
   <!--  -->
   {{ end }}
