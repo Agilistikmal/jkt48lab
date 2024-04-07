@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
+	"net/http"
 	"strings"
 	"time"
 
@@ -55,6 +57,7 @@ func GetIDNLive(username string) model.Live {
 	var result model.Live
 	for {
 		resp := helper.GraphQLIDN(page)
+		defer resp.Body.Close()
 		body, _ := io.ReadAll(resp.Body)
 		var idnResponses model.IDNResponses
 		json.Unmarshal(body, &idnResponses)
@@ -69,7 +72,22 @@ func GetIDNLive(username string) model.Live {
 				continue
 			}
 			if live.Creator.Username == username {
+				var streamingUrl string
 				startedAt, _ := time.Parse("2006-01-02T15:04:05+07:00", live.LiveAt)
+
+				playbackResp, err := http.Get(live.PlaybackUrl)
+				if err != nil {
+					log.Fatal(err)
+				}
+				defer playbackResp.Body.Close()
+				body, _ := io.ReadAll(playbackResp.Body)
+				content := strings.Split(string(body), "\n")
+				for _, c := range content {
+					if strings.Contains(c, ".m3u8") {
+						streamingUrl = c
+					}
+				}
+
 				result = model.Live{
 					Member: &model.Member{
 						Username:  live.Creator.Username,
@@ -79,7 +97,7 @@ func GetIDNLive(username string) model.Live {
 					Title:        live.Title,
 					OriginalUrl:  fmt.Sprintf("https://www.idn.app/%v/live/%v", live.Creator.Username, live.Slug),
 					RoomID:       live.Slug,
-					StreamingUrl: live.PlaybackUrl,
+					StreamingUrl: streamingUrl,
 					Views:        live.ViewCount,
 					Image:        live.ImageUrl,
 					StartedAt:    startedAt.Unix(),
