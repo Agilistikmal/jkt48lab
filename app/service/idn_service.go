@@ -28,7 +28,7 @@ func GetIDNLives() []model.Live {
 			if live.Status != "live" {
 				continue
 			}
-			if !strings.Contains(strings.ToUpper(live.Slug), PREFIX) {
+			if !strings.Contains(strings.ToUpper(live.Creator.Username), PREFIX) {
 				continue
 			}
 			startedAt, _ := time.Parse("2006-01-02T15:04:05+07:00", live.LiveAt)
